@@ -1,15 +1,18 @@
 from flask_restx import Namespace, Resource
 from flask_jwt_extended import jwt_required
+
+from .security import authorizations
 from .service import CourseService
 from .schema import course_model, course_input_model
 
-api = Namespace("courses", description="Courses operations")
+api = Namespace("courses", description="Courses operations", authorizations=authorizations)
 
 
 @api.route("")
 class CourseList(Resource):
 
     @api.marshal_list_with(course_model(api))
+    @api.doc(security=[{'BearerAuth': []}])
     @jwt_required()
     def get(self):
         """Listar todos os cursos"""
@@ -17,6 +20,7 @@ class CourseList(Resource):
 
     @api.expect(course_input_model(api))
     @api.marshal_with(course_model(api), code=201)
+    @api.doc(security=[{'BearerAuth': []}])
     @jwt_required()
     def post(self):
         """Criar novo curso"""
@@ -27,6 +31,7 @@ class CourseList(Resource):
 class CourseResource(Resource):
 
     @api.marshal_with(course_model(api))
+    @api.doc(security=[{'BearerAuth': []}])
     @jwt_required()
     def put(self, course_id):
         """Atualizar curso"""
@@ -36,6 +41,7 @@ class CourseResource(Resource):
         return course
 
     @jwt_required()
+    @api.doc(security=[{'BearerAuth': []}])
     def delete(self, course_id):
         """Remover curso"""
         if not CourseService.delete(course_id):
