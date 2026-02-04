@@ -78,15 +78,25 @@ http://localhost:5000
 
 ## 📑 Endpoints
 
+- Cursos
+
 | Método   | Rota           | Descrição                   |
-| -------- | -------------- | --------------------------- |
+| -------- | -------------- |-----------------------------|
 | `GET`    | `/courses`      | Lista todos os cursos       |
 | `POST`   | `/courses`      | Cria um novo curso          |
 | `GET`    | `/courses/{id}` | Retorna um curso específico |
 | `PUT`    | `/courses/{id}` | Atualiza um curso existente |
 | `DELETE` | `/courses/{id}` | Remove um curso             |
 
-> ⚠️ Ajuste as rotas acima conforme a implementação real do projeto.
+- Auth
+
+| Método   | Rota          | Descrição                     |
+|----------|---------------|-------------------------------|
+| `POST`   | `/auth`       | Cria um novo usuário          |
+| `PUT`    | `/auth`       | Atualiza usuário              |
+| `POST`   | `/auth/login` | Realiza a autenticação        |
+| `GET`    | `/auth/{id}`  | Retorna um usuário específico |
+| `DELETE` | `/auth/{id}`  | Remove um usuário             |
 
 ---
 
